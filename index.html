@@ -64,7 +64,7 @@
 
         sessionKeys.forEach(session => {
           const status = user[session] || "-";
-          if (status.toUpperCase() === "P") presentCount++;
+          if (String(status).toUpperCase() === "P") presentCount++;
           sessionData += `<tr><td>${session}</td><td>${status}</td></tr>`;
         });
 
