@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,7 @@
   <div id="result"></div>
 
   <script>
-    const sheetURL = "https://script.google.com/macros/s/AKfycbyg7SMyyPChJtneFHbA1v5ET-BndbqVZglfy8ijevnkDoPrh9nRR3OTykwQi-Pd1Kl4/exec"; // Your deployed Apps Script URL
+    const sheetURL = "https://script.google.com/macros/s/AKfycbyg7SMyyPChJtneFHbA1v5ET-BndbqVZglfy8ijevnkDoPrh9nRR3OTykwQi-Pd1Kl4/exec";
 
     async function checkAttendance() {
       const email = document.getElementById("email").value.trim().toLowerCase();
@@ -54,7 +55,6 @@
           return;
         }
 
-        // Filter out only session keys (exclude Email, Total Attended, Attendance %)
         const sessionKeys = Object.keys(user).filter(
           key => key !== "Email" && !key.toLowerCase().includes("total") && !key.toLowerCase().includes("percent")
         );
