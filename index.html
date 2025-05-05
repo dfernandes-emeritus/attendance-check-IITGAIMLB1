@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attendance Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    table, th, td {
+      border: 1px solid #aaa;
+      border-collapse: collapse;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Attendance Checker</h2>
+  <label for="email">Enter your registered email address:</label><br>
+  <input type="email" id="email" placeholder="you@example.com" required />
+  <button onclick="checkAttendance()">Search</button>
+  <div id="result"></div>
+
+  <script>
+    const sheetURL = "https://script.google.com/macros/s/AKfycbyg7SMyyPChJtneFHbA1v5ET-BndbqVZglfy8ijevnkDoPrh9nRR3OTykwQi-Pd1Kl4/exec";
+
+    async function checkAttendance() {
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const resultContainer = document.getElementById("result");
+      resultContainer.innerHTML = "Loading...";
+
+      try {
+        const response = await fetch(sheetURL);
+        const data = await response.json();
+
+        const user = data.find(row => String(row.Email).toLowerCase() === email);
+
+        if (!user) {
+          resultContainer.innerHTML = `<p style="color:red;">No records found for this email.</p>`;
+          return;
+        }
+
+        const sessionKeys = Object.keys(user).filter(
+          key => key !== "Email" && !key.toLowerCase().includes("total") && !key.toLowerCase().includes("percent")
+        );
+
+        let presentCount = 0;
+        let totalMarked = 0;
+        let sessionData = `<table><tr><th>Session</th><th>Status</th></tr>`;
+
+        sessionKeys.forEach(session => {
+          const status = user[session];
+          const statusText = (status !== undefined && status !== null) ? String(status).trim().toUpperCase() : "";
+
+          if (statusText === "P") {
+            presentCount++;
+            totalMarked++;
+          } else if (statusText === "A") {
+            totalMarked++;
+          }
+
+          const displayStatus = statusText === "" ? "-" : statusText;
+          sessionData += `<tr><td>${session}</td><td>${displayStatus}</td></tr>`;
+        });
+
+        sessionData += `</table>`;
+
+        const percentage = totalMarked > 0 ? (presentCount / totalMarked) * 100 : 0;
+
+        resultContainer.innerHTML = `
+          <p><strong>Email:</strong> ${user.Email}</p>
+          <p><strong>Total Marked Sessions:</strong> ${totalMarked}</p>
+          <p><strong>Total Present (P):</strong> ${presentCount}</p>
+          <p><strong>Attendance Percentage:</strong> ${percentage.toFixed(2)}%</p>
+          ${sessionData}
+        `;
+      } catch (err) {
+        console.error("Fetch failed:", err);
+        resultContainer.innerHTML = `<p style="color:red;">Error fetching attendance data: ${err.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
