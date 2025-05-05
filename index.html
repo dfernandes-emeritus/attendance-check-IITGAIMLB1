@@ -9,23 +9,47 @@
       padding: 20px;
       max-width: 800px;
       margin: auto;
+      background-color: #f9f9f9;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
     }
     table, th, td {
-      border: 1px solid #aaa;
-      border-collapse: collapse;
-      padding: 8px;
+      border: 1px solid #ccc;
       text-align: center;
+      padding: 10px;
+      border-radius: 8px;
     }
     th {
-      background-color: #f0f0f0;
+      background-color: #f2f2f2;
     }
-    input, button {
+    tr:nth-child(even) {
+      background-color: #fcfcfc;
+    }
+    input[type="email"] {
       padding: 10px;
-      margin: 10px 0;
+      width: 60%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
       font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: 10px;
+    }
+    button:hover {
+      background-color: #45a049;
     }
     #result {
-      margin-top: 20px;
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -61,7 +85,7 @@
 
         let presentCount = 0;
         let totalMarked = 0;
-        let sessionData = `<table><tr><th>Session</th><th>Status</th></tr>`;
+        let sessionData = `<table><tr><th>Session Date</th><th>Status</th></tr>`;
 
         sessionKeys.forEach(session => {
           const status = user[session];
@@ -74,8 +98,14 @@
             totalMarked++;
           }
 
+          // Trim date to remove time/timezone if it looks like a date
+          let displaySession = session;
+          if (session.includes("T")) {
+            displaySession = session.split("T")[0];
+          }
+
           const displayStatus = statusText === "" ? "-" : statusText;
-          sessionData += `<tr><td>${session}</td><td>${displayStatus}</td></tr>`;
+          sessionData += `<tr><td>${displaySession}</td><td>${displayStatus}</td></tr>`;
         });
 
         sessionData += `</table>`;
