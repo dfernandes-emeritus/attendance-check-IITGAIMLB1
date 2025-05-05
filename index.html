@@ -1,107 +1,90 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
+  <title>Attendance Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    table, th, td {
+      border: 1px solid #aaa;
+      border-collapse: collapse;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;Attendance Checker&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>body {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-family: Arial, sans-serif;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 20px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width: 800px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin: auto;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>table, th, td {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border: 1px solid #aaa;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-collapse: collapse;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 8px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align: center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>th {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background-color: #f0f0f0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>input, button {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 10px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin: 10px 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 16px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#result {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 20px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;h2&gt;Attendance Checker&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;label for="email"&gt;Enter your registered email address:&lt;/label&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;input type="email" id="email" placeholder="you@example.com" required /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;button onclick="checkAttendance()"&gt;Search&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div id="result"&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const sheetURL = "https://script.google.com/macros/s/AKfycbyg7SMyyPChJtneFHbA1v5ET-BndbqVZglfy8ijevnkDoPrh9nRR3OTykwQi-Pd1Kl4/exec"; // Your deployed Apps Script URL</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>async function checkAttendance() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const email = document.getElementById("email").value.trim().toLowerCase();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const resultContainer = document.getElementById("result");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>resultContainer.innerHTML = "Loading...";</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>try {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const response = await fetch(sheetURL);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const data = await response.json();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const user = data.find(row =&gt; String(row.Email).toLowerCase() === email);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>if (!user) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>resultContainer.innerHTML = `&lt;p style="color:red;"&gt;No records found for this email.&lt;/p&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>return;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Filter out only session keys (exclude Email, Total Attended, Attendance %)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const sessionKeys = Object.keys(user).filter(</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>key =&gt; key !== "Email" &amp;&amp; !key.toLowerCase().includes("total") &amp;&amp; !key.toLowerCase().includes("percent")</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let presentCount = 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let sessionData = `&lt;table&gt;&lt;tr&gt;&lt;th&gt;Session&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;/tr&gt;`;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>sessionKeys.forEach(session =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>const status = user[session] || "-";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>if (status.toUpperCase() === "P") presentCount++;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>sessionData += `&lt;tr&gt;&lt;td&gt;${session}&lt;/td&gt;&lt;td&gt;${status}&lt;/td&gt;&lt;/tr&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>sessionData += `&lt;/table&gt;`;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const total = user["Total Attended"] || presentCount;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const percentage = user["Attendance %"] || (presentCount / sessionKeys.length);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>resultContainer.innerHTML = `</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p&gt;&lt;strong&gt;Email:&lt;/strong&gt; ${user.Email}&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p&gt;&lt;strong&gt;Total Sessions:&lt;/strong&gt; ${sessionKeys.length}&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p&gt;&lt;strong&gt;Total Present (P):&lt;/strong&gt; ${total}&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p&gt;&lt;strong&gt;Attendance Percentage:&lt;/strong&gt; ${(percentage * 100).toFixed(2)}%&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>${sessionData}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>} catch (err) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>console.error("Fetch failed:", err);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>resultContainer.innerHTML = `&lt;p style="color:red;"&gt;Error fetching attendance data: ${err.message}&lt;/p&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+  <h2>Attendance Checker</h2>
+  <label for="email">Enter your registered email address:</label><br>
+  <input type="email" id="email" placeholder="you@example.com" required />
+  <button onclick="checkAttendance()">Search</button>
+  <div id="result"></div>
+
+  <script>
+    const sheetURL = "https://script.google.com/macros/s/AKfycbyg7SMyyPChJtneFHbA1v5ET-BndbqVZglfy8ijevnkDoPrh9nRR3OTykwQi-Pd1Kl4/exec"; // Your deployed Apps Script URL
+
+    async function checkAttendance() {
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const resultContainer = document.getElementById("result");
+      resultContainer.innerHTML = "Loading...";
+
+      try {
+        const response = await fetch(sheetURL);
+        const data = await response.json();
+
+        const user = data.find(row => String(row.Email).toLowerCase() === email);
+
+        if (!user) {
+          resultContainer.innerHTML = `<p style="color:red;">No records found for this email.</p>`;
+          return;
+        }
+
+        // Filter out only session keys (exclude Email, Total Attended, Attendance %)
+        const sessionKeys = Object.keys(user).filter(
+          key => key !== "Email" && !key.toLowerCase().includes("total") && !key.toLowerCase().includes("percent")
+        );
+
+        let presentCount = 0;
+        let sessionData = `<table><tr><th>Session</th><th>Status</th></tr>`;
+
+        sessionKeys.forEach(session => {
+          const status = user[session] || "-";
+          if (status.toUpperCase() === "P") presentCount++;
+          sessionData += `<tr><td>${session}</td><td>${status}</td></tr>`;
+        });
+
+        sessionData += `</table>`;
+
+        const total = user["Total Attended"] || presentCount;
+        const percentage = user["Attendance %"] || (presentCount / sessionKeys.length);
+
+        resultContainer.innerHTML = `
+          <p><strong>Email:</strong> ${user.Email}</p>
+          <p><strong>Total Sessions:</strong> ${sessionKeys.length}</p>
+          <p><strong>Total Present (P):</strong> ${total}</p>
+          <p><strong>Attendance Percentage:</strong> ${(percentage * 100).toFixed(2)}%</p>
+          ${sessionData}
+        `;
+      } catch (err) {
+        console.error("Fetch failed:", err);
+        resultContainer.innerHTML = `<p style="color:red;">Error fetching attendance data: ${err.message}</p>`;
+      }
+    }
+  </script>
 </body>
 </html>
